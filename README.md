@@ -83,6 +83,9 @@ Para que você possa criar seu mundo é necessário criar seu próprio usuário:
                   }
                 }
             ```
+            
+## Objetos
+Todos os objetos dentro da aplicação, necessitam do token de auticação que retorna no autenticador. Este token é do tipo bearer e tem validade de um dia. 
 #### Classe
 Assim como em todo RPG a classe é essencial para o seu personagem, desta forma antes de mais nada, lembre-se de criar as classes que você irá utilizar. Para obter inspiração, saiba mais neste [link](https://rpgromaduke.weebly.com/classes-e-raccedilas.html).
 
@@ -546,7 +549,6 @@ Para que seu personagem se torne forte, o mesmo precisará de equipamentos e é 
                   "message": "Tipo de equipamento removido com sucesso!"
                 }
             ```
-            
 #### Equipamentos
 Após a criação dos tipos de equipamentos, basta criar os equipamentos necessários para seus personagens.
 
@@ -655,3 +657,239 @@ Após a criação dos tipos de equipamentos, basta criar os equipamentos necess�
                 }
             ```
 
+#### Personagens
+Seus personagens é composto de todos as características anteriores, para torna-lo forte, ótimos equipamentos, uma boa classe e raça são essenciais.
+
+* `POST` /personagens
+    Ao criar seu personagem lembre-se de que o nome, dano, classe e raça são obrigatórios. Os personagens possuem nomes unicos. 
+    * Campos
+        *   nome (`Obrigatório`) 
+        *   dano (`Obrigatório`)
+        *   classe (`Obrigatório`)
+        *   raca (`Obrigatório`)
+        *   equipamentos
+        *   habilidades
+        *   descricao
+    *   Requisição
+        * Request Body   
+            ```JSON
+            {
+            	"nome": "Merlin",
+            	"dano": 20,
+            	"clase": "5ed02a7b0522ea42bc9e49e3",
+            	"raca": "5ecf0e31b58d6c368018fade",
+            	"descricao": "Mago supremo",
+            	"equipamentos": [
+            		{
+            			"_id": "5ed02b910522ea42bc9e49e5"
+            		}
+            	],
+            	"habilidades": [
+            		{
+            			"_id": "5ecf0e4db58d6c368018fadf"
+            		}
+            	]
+            }
+            ```
+        * Response Body    
+            ```JSON 
+               {
+                  "success": true,
+                  "message": "Personagem criado com sucesso!",
+                  "content": {
+                    "nivel": 1,
+                    "habilidades": [
+                      "5ecf0e4db58d6c368018fadf"
+                    ],
+                    "equipamentos": [
+                      "5ed02b910522ea42bc9e49e5"
+                    ],
+                    "_id": "5ed02cb67b51c53bc43b2e73",
+                    "nome": "Merlin",
+                    "clase": "5ed02a7b0522ea42bc9e49e3",
+                    "raca": "5ecf0e31b58d6c368018fade",
+                    "usuario": "5ecf03b374f59d317cbca7d1",
+                    "__v": 0
+                  }
+                }
+            ```
+ * `GET` /personagens
+    Lista todas os personagens.
+    * Filtros
+        *  nome
+    *   Requisição
+        * Response Body   
+            ```JSON
+            {
+              "success": true,
+              "total": 1,
+              "message": "Personagens listados com sucesso!",
+              "content": [
+                {
+                  "nivel": 1,
+                  "habilidades": [
+                    {
+                      "tiposEquipamentos": [],
+                      "_id": "5ecf0e4db58d6c368018fadf",
+                      "nome": "FireBall",
+                      "dano": 20,
+                      "clase": "5ecf08eabd96d848d8402b1f",
+                      "usuario": "5ecf03b374f59d317cbca7d1",
+                      "__v": 0
+                    }
+                  ],
+                  "equipamentos": [
+                    {
+                      "_id": "5ed02b910522ea42bc9e49e5",
+                      "nome": "Cajado elfico",
+                      "tipoEquipamento": "5ecf0ef9b58d6c368018fae0",
+                      "usuario": "5ecf03b374f59d317cbca7d1",
+                      "__v": 0
+                    }
+                  ],
+                  "_id": "5ed02cb67b51c53bc43b2e73",
+                  "nome": "Merlin",
+                  "clase": {
+                    "_id": "5ed02a7b0522ea42bc9e49e3",
+                    "nome": "Mago",
+                    "proeficiencia": "MAGIA",
+                    "usuario": "5ecf03b374f59d317cbca7d1",
+                    "__v": 0
+                  },
+                  "raca": {
+                    "_id": "5ecf0e31b58d6c368018fade",
+                    "nome": "Humano",
+                    "vida": 60,
+                    "forca": 40,
+                    "usuario": "5ecf03b374f59d317cbca7d1",
+                    "__v": 0
+                  },
+                  "usuario": "5ecf03b374f59d317cbca7d1",
+                  "__v": 0
+                }
+              ]
+            }
+            ```
+* `GET` /personagens/{id}
+    Traz um unico personagem por seu id informado.
+    *   Requisição
+        * Response Body   
+            ```JSON
+            	{
+                  "success": true,
+                  "message": "Personagem encontrado com sucesso!",
+                  "content": {
+                    "nivel": 1,
+                    "habilidades": [
+                      {
+                        "tiposEquipamentos": [],
+                        "_id": "5ecf0e4db58d6c368018fadf",
+                        "nome": "FireBall",
+                        "dano": 20,
+                        "clase": "5ecf08eabd96d848d8402b1f",
+                        "usuario": "5ecf03b374f59d317cbca7d1",
+                        "__v": 0
+                      }
+                    ],
+                    "equipamentos": [
+                      {
+                        "_id": "5ed02b910522ea42bc9e49e5",
+                        "nome": "Cajado elfico",
+                        "tipoEquipamento": "5ecf0ef9b58d6c368018fae0",
+                        "usuario": "5ecf03b374f59d317cbca7d1",
+                        "__v": 0
+                      }
+                    ],
+                    "_id": "5ed02cb67b51c53bc43b2e73",
+                    "nome": "Merlin",
+                    "clase": {
+                      "_id": "5ed02a7b0522ea42bc9e49e3",
+                      "nome": "Mago",
+                      "proeficiencia": "MAGIA",
+                      "usuario": "5ecf03b374f59d317cbca7d1",
+                      "__v": 0
+                    },
+                    "raca": {
+                      "_id": "5ecf0e31b58d6c368018fade",
+                      "nome": "Humano",
+                      "vida": 60,
+                      "forca": 40,
+                      "usuario": "5ecf03b374f59d317cbca7d1",
+                      "__v": 0
+                    },
+                    "usuario": "5ecf03b374f59d317cbca7d1",
+                    "__v": 0
+                  }
+                }
+            ```
+* `PUT` /personagens/{id}
+    Altera a raça por seu id informado.
+    *  Campos
+        *   nome
+        *   dano
+        *   classe
+        *   raca
+        *   equipamentos
+        *   habilidades
+        *   descricao
+    *   Requisição
+        * Request Body   
+            ```JSON
+            {
+            	"nome": "Dark Merlin",
+            	"dano": 20,
+            	"clase": "5ed02a7b0522ea42bc9e49e3",
+            	"raca": "5ecf0e31b58d6c368018fade",
+            	"descricao": "Mago supremo negro",
+            	"equipamentos": [
+            		{
+            			"_id": "5ed02b910522ea42bc9e49e5"
+            		},
+            		{
+            			"_id": "5ed02d907b51c53bc43b2e74"
+            		}
+            	],
+            	"habilidades": [
+            		{
+            			"_id": "5ecf0e4db58d6c368018fadf"
+            		},
+            		{
+            			"_id": "5ed02da67b51c53bc43b2e75"
+            		}		
+            	]
+            }
+            ```
+        * Response Body   
+            ```JSON
+            	{
+                  "success": true,
+                  "message": "Personagem alterado com sucesso!",
+                  "content": {
+                    "nivel": 1,
+                    "habilidades": [
+                      "5ecf0e4db58d6c368018fadf",
+                      "5ed02da67b51c53bc43b2e75"
+                    ],
+                    "equipamentos": [
+                      "5ed02b910522ea42bc9e49e5",
+                      "5ed02d907b51c53bc43b2e74"
+                    ],
+                    "_id": "5ed02cb67b51c53bc43b2e73",
+                    "nome": "Dark Merlin",
+                    "clase": "5ed02a7b0522ea42bc9e49e3",
+                    "raca": "5ecf0e31b58d6c368018fade",
+                    "usuario": "5ecf03b374f59d317cbca7d1",
+                    "__v": 0
+                  }
+                }
+            ```
+* `DELETE` /personagens/{id}
+    Remove o personagem por seu id informado.
+    *   Requisição
+        * Response Body   
+            ```JSON
+            	{
+                  "success": true,
+                  "message": "Personagem removido com sucesso!"
+                }
+            ```
