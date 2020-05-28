@@ -44,6 +44,8 @@ router.post('/authenticate', async (req,res) => {
     if(!await bcrypt.compare(password, user.password))
         return res.status(400).send({ success: false, message: 'Senha incorreta!' });
 
+    user.password = undefined;
+
     return res.send({   success: true,
                         message: 'Usúario autenticado com sucesso!', 
                         content: {

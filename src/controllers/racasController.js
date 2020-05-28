@@ -27,9 +27,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:claseId', async (req, res) => {
+router.get('/:racaId', async (req, res) => {
     try{
-        const raca = await Raca.findById(req.params.claseId, {usuario: req.userId});
+        const raca = await Raca.findById(req.params.racaId);
 
         return res.send({
                     success: true, 
@@ -65,15 +65,15 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:claseId', async (req, res) => {
+router.put('/:racaId', async (req, res) => {
     try{
         const { nome } = req.body;
 
-        if(await Raca.findOne({ nome, _id:{$ne: req.params.claseId} })){
+        if(await Raca.findOne({ nome, _id:{$ne: req.params.racaId} })){
             return res.status(400).send({ success:false, message: 'Este nome de raça já existe!'});
         }
 
-        const raca = await Raca.findByIdAndUpdate(req.params.claseId, req.body, {new: true});
+        const raca = await Raca.findByIdAndUpdate(req.params.racaId, req.body, {new: true});
 
         return res.send({
                     success: true, 
@@ -87,9 +87,9 @@ router.put('/:claseId', async (req, res) => {
     }
 });
 
-router.delete('/:claseId', async (req, res) => {
+router.delete('/:racaId', async (req, res) => {
     try{
-        await Raca.findByIdAndRemove(req.params.claseId);
+        await Raca.findByIdAndRemove(req.params.racaId);
 
         return res.send({
                     success: true, 

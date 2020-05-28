@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
             filter.nome = {$regex: '.*' + req.query.nome + '.*' };
         }
 
-        const personagens = await Personagem.find(filter).populate(["clase", "raca", "habilidades"]).limit(req.query.limit);;
+        const personagens = await Personagem.find(filter).populate(["clase", "raca", "habilidades", "equipamentos"]).limit(req.query.limit);;
 
         return res.send({
                     success: true, 
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:personagemId', async (req, res) => {
     try{
-        const personagem = await Personagem.findById(req.params.personagemId, {usuario: req.userId}).populate(["clase", "raca", "habilidades"]);
+        const personagem = await Personagem.findById(req.params.personagemId).populate(["clase", "raca", "habilidades", "equipamentos"]);
 
         return res.send({
                     success: true, 

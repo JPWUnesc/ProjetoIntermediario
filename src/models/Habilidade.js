@@ -7,8 +7,7 @@ const HabilidadeSchema = new mongoose.Schema({
         require: true
     },
     descricao : {
-        type: String,
-        require: true
+        type: String
     },
     clase : {
         type: mongoose.Schema.Types.ObjectId,

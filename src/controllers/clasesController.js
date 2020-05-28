@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:claseId', async (req, res) => {
     try{
-        const clase = await Clase.findById(req.params.claseId, {usuario: req.userId});
+        const clase = await Clase.findById(req.params.claseId);
 
         return res.send({
                     success: true, 
@@ -49,6 +49,10 @@ router.post('/', async (req, res) => {
 
         if(await Clase.findOne({ nome, usuario: req.userId })){
             return res.status(400).send({ success:false, message: 'Esta classe já existe!'});
+        }
+
+        if(req.body.proeficiencia === undefined || (req.body.proeficiencia !== 'ATAQUE' && req.body.proeficiencia != 'MAGIA')){
+            return res.status(400).send({ success:false, message: 'Proeficiencia deve ser informada: ATAQUE ou MAGIA!'});
         }
 
         const clase = await Clase.create({ ...req.body, usuario: req.userId });

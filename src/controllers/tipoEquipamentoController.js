@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:tipoEquipamentoId', async (req, res) => {
     try{
-        const tipoEquipamento = await TipoEquipamento.findById(req.params.tipoEquipamentoId, {usuario: req.userId});
+        const tipoEquipamento = await TipoEquipamento.findById(req.params.tipoEquipamentoId);
 
         return res.send({
                     success: true, 

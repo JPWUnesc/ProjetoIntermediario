@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:habilidadeId', async (req, res) => {
     try{
-        const habilidade = await Habilidade.findById(req.params.habilidadeId, {usuario: req.userId}).populate(["clase"]);
+        const habilidade = await Habilidade.findById(req.params.habilidadeId).populate(["clase"]);
 
         return res.send({
                     success: true, 
