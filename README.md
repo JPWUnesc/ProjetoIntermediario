@@ -277,10 +277,10 @@ Tão importante quanto a classe, a raça define seus pontos fortes e afinidades 
 * `PUT` /racas/{id}
     Altera a raça por seu id informado.
     *  Campos
-        *   nome (`Obrigatório`) 
-        *   vida (`Obrigatório`)
-        *   forca (`Obrigatório`)
-        *   magia (`Obrigatório`)
+        *   nome
+        *   vida
+        *   forca
+        *   magia
         *   descricao
     *   Requisição
         * Request Body   
@@ -407,9 +407,9 @@ Cada classe possui habilidades especificas estas devem ser cridas.
 * `PUT` /habilidades/{id}
     Altera a raça por seu id informado.
     *  Campos
-        *   nome (`Obrigatório`) 
-        *   dano (`Obrigatório`)
-        *   classe (`Obrigatório`)
+        *   nome
+        *   dano
+        *   classe
         *   descricao
     *   Requisição
         * Request Body   
@@ -516,7 +516,7 @@ Para que seu personagem se torne forte, o mesmo precisará de equipamentos e é 
 * `PUT` /tiposequipamento/{id}
     Altera o tipo de equipamento por seu id informado.
     *  Campos
-        *   nome (`Obrigatório`) 
+        *   nome
         *   descricao
     *   Requisição
         * Request Body   
@@ -622,8 +622,8 @@ Após a criação dos tipos de equipamentos, basta criar os equipamentos necess�
 * `PUT` /equipamentos/{id}
     Altera a raça por seu id informado.
     *  Campos
-        *   nome (`Obrigatório`) 
-        *   tipoEquipamento (`Obrigatório`)
+        *   nome
+        *   tipoEquipamento
         *   descricao
     *   Requisição
         * Request Body   
